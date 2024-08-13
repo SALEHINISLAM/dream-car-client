@@ -1,8 +1,13 @@
-# React + Vite
+User pages:
+# Home (/)
+# cars (/cars)
+# shop (/shop)
+# About (/about)
+# Contact (/contact)
+# login (/login)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Admin page
+# dashboard (/admin/dashboard)
+# add car (/admin/add)
+# update car (/admin/update)
+# login (/admin/login)
