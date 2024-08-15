@@ -10,6 +10,11 @@ import Shop from './ClientPages/Shop.jsx'
 import About from './ClientPages/About.jsx'
 import Contact from './ClientPages/Contact.jsx'
 import Login from './ClientPages/Login.jsx'
+import AdminLogin from './AdminPages/AdminLogin.jsx'
+import AdminReg from './AdminPages/AdminReg.jsx'
+import AuthProviders from './Providers/AuthProviders.jsx'
+import AdminPrivateRoutes from './PrivateRoutes/AdminPrivateRoutes.jsx'
+import AdminAddCar from './AdminPages/AdminAddCar.jsx'
 
 const router=createBrowserRouter([
   {
@@ -44,12 +49,26 @@ const router=createBrowserRouter([
   },
   {
     path:'/admin',
-    element:<Admin/>,
+    element:<AdminPrivateRoutes><Admin/></AdminPrivateRoutes>,
   },
+  {
+    path:'/admin/login',
+    element:<AdminLogin/>,
+  },
+  {
+    path:'/admin/register',
+    element:<AdminReg/>
+  },
+  {
+    path:'/admin/add-car',
+    element:<AdminPrivateRoutes><AdminAddCar/></AdminPrivateRoutes>
+  }
 ])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router}/>
+    <AuthProviders>
+      <RouterProvider router={router}/>
+    </AuthProviders>
   </StrictMode>,
 )
