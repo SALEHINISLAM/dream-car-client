@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import AdminNavbar from "../Components/AdminNavbar";
+import Swal from "sweetalert2";
+import { AuthContext } from "../Providers/AuthProviders";
 
 const AdminAddCar = (props) => {
+    const {admin}=useContext(AuthContext);
+    console.log(admin.displayName);
     const handleAddCar=async(e)=>{
         e.preventDefault();
         const form=new FormData(e.currentTarget);
@@ -14,8 +18,38 @@ const AdminAddCar = (props) => {
         const seat=form.get('seat');
         const brandNew=form.get('brandNew');
         const bankLoan=form.get('bankLoan');
-        const newCar={name, brand, price, details, photo, seat, brandNew, bankLoan};
+        const seller=admin.displayName;
+        const addedBy=seller.split(' ').join('');
+        const newCar={name, brand, price, details, photo, seat, brandNew, bankLoan,addedBy};
         console.log(newCar);
+        fetch(`http://localhost:5001/addcar`,{
+            method:"POST",
+            headers:{
+                "content-type":"application/json"
+            },
+            body: JSON.stringify(newCar)
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            if (data.insertedId) {
+                Swal.fire({
+                    icon:"success",
+                    title:"Success",
+                    text:"Cars added successful !",
+                })
+                .then(result=>{
+                    if (result.isConfirmed) {
+                        window.open('/admin/add-car',self)
+                    }
+                })
+            }else{
+                Swal.fire({
+                    icon:"error",
+                    title:"Something went wrong !"
+                })
+            }
+        })
     }
   return (
     <div className="bg-gray-700 text-white">

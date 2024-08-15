@@ -50,6 +50,7 @@ const router=createBrowserRouter([
   {
     path:'/admin',
     element:<AdminPrivateRoutes><Admin/></AdminPrivateRoutes>,
+    loader:()=>fetch('http://localhost:5001/addcar'),
   },
   {
     path:'/admin/login',
