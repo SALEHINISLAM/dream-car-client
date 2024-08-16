@@ -41,7 +41,7 @@ const AdminLogin = (props) => {
             return;
         }
         try{
-            response=await AdminSignIn(email, password)
+            const response=await AdminSignIn(email, password)
             navigate(from, {replace:true});
             Swal.fire(`Hi ${response.displayName}`)
             .then(
@@ -82,8 +82,12 @@ const AdminLogin = (props) => {
       }
     }
   return (
-    <div className="flex flex-col items-center justify-center container mx-auto w-full h-screen">
-      <form className="card-body" onSubmit={handleAdminLogin}>
+    <div className="flex bg-black flex-col items-center justify-center  mx-auto w-full h-screen">
+      <button onClick={handleAdminGoogleLogin} className="btn my-16 mt-24 bg-black btn-primary text-white">
+      Login with Google
+      </button>
+      <p className="text-white">Or</p>
+      <form className="card-body bg-black text-white" onSubmit={handleAdminLogin}>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>
@@ -116,9 +120,7 @@ const AdminLogin = (props) => {
           <Link to={`/admin/register`}>Register</Link>
         </p>
       </form>
-      <button onClick={handleAdminGoogleLogin}>
-      Login with Google
-      </button>
+      
     </div>
   );
 };

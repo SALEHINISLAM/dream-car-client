@@ -52,7 +52,11 @@ const AdminReg = (props) => {
 
   return (
     <div className='flex items-center justify-center container mx-auto w-full h-screen'>
+      
       <form className="card-body" onSubmit={handleAdminRegistration}>
+      <h1 className="text-white text-center text-5xl font-bold pb-10 pt-8">
+        Register Now
+      </h1>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Name</span>

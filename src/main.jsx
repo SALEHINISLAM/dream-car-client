@@ -17,6 +17,8 @@ import AdminPrivateRoutes from './PrivateRoutes/AdminPrivateRoutes.jsx'
 import AdminAddCar from './AdminPages/AdminAddCar.jsx'
 import CarDetails from './Components/CarDetails.jsx'
 import AdminUpdateCar from './AdminPages/AdminUpdateCar.jsx'
+import ClientCarCard from './Components/ClientCarCard.jsx'
+import ClientCarDetails from './Components/ClientCarDetails.jsx'
 
 const router=createBrowserRouter([
   {
@@ -46,6 +48,11 @@ const router=createBrowserRouter([
       {
         path:'/login',
         element:<Login/>
+      },
+      {
+        path:'/carDetails/:id',
+        element:<ClientCarDetails/>,
+        loader:({params})=>fetch(`http://localhost:5001/car/${params.id}`)
       }
     ]
   },

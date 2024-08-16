@@ -1,38 +1,53 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProviders";
+import Swal from "sweetalert2";
 
 const Navbar = (props) => {
-const links=(
+  const { admin,AdminLogOut } = useContext(AuthContext);
+  console.log(admin)
+  const handleLogOut=async()=>{
+    try{
+      await AdminLogOut();
+      Swal.fire('Logout Successful...')
+    }catch(err){
+      console.log(err);
+      Swal.fire(err.message)
+    }
+  }
+  const links = (
     <>
-    <li>
+      <li>
         <NavLink
-        to="/"
-        className={({ isActive, isPending }) =>
-          isActive
-            ? "active text-red-600 font-bold underline-offset-1 underline"
-            : isPending
-            ? "pending"
-            : ""}
+          to="/"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? "active text-red-600 font-bold underline-offset-1 underline"
+              : isPending
+              ? "pending"
+              : ""
+          }
         >
-            Home
+          Home
         </NavLink>
-    </li>
-    <li>
+      </li>
+      <li>
         <NavLink
-        to="/cars"
-        className={({ isActive, isPending }) =>
-          isActive
-            ? "active text-red-600 font-bold underline-offset-1 underline"
-            : isPending
-            ? "pending"
-            : ""}
+          to="/cars"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? "active text-red-600 font-bold underline-offset-1 underline"
+              : isPending
+              ? "pending"
+              : ""
+          }
         >
-            Cars
+          Cars
         </NavLink>
-    </li>
+      </li>
     </>
-)
+  );
   return (
     <div className="mx-auto container bg-black text-white rounded-b-xl">
       <div className="navbar ">
@@ -58,22 +73,53 @@ const links=(
               tabIndex={0}
               className="menu menu-sm dropdown-content rounded-box bg-black text-white z-[1] mt-3 w-52 p-2 shadow"
             >
-            {
-                links
-            }
+              {links}
             </ul>
           </div>
           <a className="btn btn-ghost text-xl">daisyUI</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal bg-black text-white px-1">
-            {
-                links
-            }
+            {links}
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
+        {admin ? (
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full">
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                />
+              </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            >
+              <li>
+                <a className="justify-between">
+                  {admin.displayName}
+                </a>
+              </li>
+              <li>
+                <a>My Cart</a>
+              </li>
+              <li onClick={handleLogOut}>
+                <a>Logout</a>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div>
+            <a className="btn" href="/login">Login</a>
+          </div>
+        )}
         </div>
       </div>
     </div>
