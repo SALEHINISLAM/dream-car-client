@@ -47,7 +47,7 @@ const AuthProviders = ({ children }) => {
         password
       );
       setAdmin(userCredential.user);
-      return userCredential;
+      return userCredential.user;
     } catch (error) {
       throw error;
     }

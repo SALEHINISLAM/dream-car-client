@@ -19,6 +19,7 @@ import CarDetails from './Components/CarDetails.jsx'
 import AdminUpdateCar from './AdminPages/AdminUpdateCar.jsx'
 import ClientCarCard from './Components/ClientCarCard.jsx'
 import ClientCarDetails from './Components/ClientCarDetails.jsx'
+import Register from './ClientPages/Register.jsx'
 
 const router=createBrowserRouter([
   {
@@ -47,12 +48,18 @@ const router=createBrowserRouter([
       },
       {
         path:'/login',
-        element:<Login/>
+        element:<Login/>,
+        loader:()=>fetch('http://localhost:5001/users'),
       },
       {
         path:'/carDetails/:id',
         element:<ClientCarDetails/>,
         loader:({params})=>fetch(`http://localhost:5001/car/${params.id}`)
+      },
+      {
+        path:'/register',
+        element:<Register/>,
+        loader:()=>fetch('http://localhost:5001/users'),
       }
     ]
   },

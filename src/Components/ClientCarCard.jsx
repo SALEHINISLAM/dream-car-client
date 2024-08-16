@@ -1,9 +1,47 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../Providers/AuthProviders";
 
 const ClientCarCard = ({car}) => {
+  const {admin}=useContext(AuthContext);
+  //console.log(admin.email, admin.displayName)
+  const [pastUsers, setPastUsers]=useState([]);
+  useEffect(()=>{
+    fetch('http://localhost:5001/users')
+    .then(res=>res.json())
+    .then(datum=>setPastUsers(datum))
+  },[])
+  
     const {_id,name,brand,price,details,photo,seat,brandNew,bankLoan}=car;
+    
+    const handleAddToCart=(id)=>{
+      const currentUser=pastUsers.find(user=> user.name == admin.displayName && user.email == admin.email);
+      console.log("currentUser", currentUser);
+      const carId=id;
+      fetch(`http://localhost:5001/user/${currentUser._id}`,{
+        method:"PUT",
+        headers:{
+          "content-type":"application/json",
+        },
+        body: JSON.stringify({carId})
+      })
+      .then(res=>res.json())
+      .then(result=>{
+        console.log(result)
+        if (result.modifiedCount>0) {
+          Swal.fire({
+            title:'Success !!!',
+            text:'Your car cart updated successfully !',
+            icon:'success',
+            confirmButtonText:`<a href='/'>Okay</a>`
+        })
+        }else{
+          Swal.fire('Something went wrong...')
+        }
+      })
+    }
     return (
     <div>
       <div className="card bg-base-100 image-full shadow-xl w-full h-full">
@@ -20,7 +58,7 @@ const ClientCarCard = ({car}) => {
             <Link to={`/carDetails/${_id}`}>
             <button className="btn btn-primary">See Details</button>
             </Link>
-            <button className="btn btn-primary">Add to Cart</button>
+            <button className="btn btn-primary" onClick={()=>handleAddToCart(_id)}>Add to Cart</button>
           </div>
         </div>
       </div>
