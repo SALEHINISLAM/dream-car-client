@@ -15,6 +15,7 @@ import AdminReg from './AdminPages/AdminReg.jsx'
 import AuthProviders from './Providers/AuthProviders.jsx'
 import AdminPrivateRoutes from './PrivateRoutes/AdminPrivateRoutes.jsx'
 import AdminAddCar from './AdminPages/AdminAddCar.jsx'
+import CarDetails from './Components/CarDetails.jsx'
 
 const router=createBrowserRouter([
   {
@@ -50,7 +51,7 @@ const router=createBrowserRouter([
   {
     path:'/admin',
     element:<AdminPrivateRoutes><Admin/></AdminPrivateRoutes>,
-    loader:()=>fetch('http://localhost:5001/addcar'),
+    loader:async()=>await fetch('http://localhost:5001/addcar'),
   },
   {
     path:'/admin/login',
@@ -63,6 +64,11 @@ const router=createBrowserRouter([
   {
     path:'/admin/add-car',
     element:<AdminPrivateRoutes><AdminAddCar/></AdminPrivateRoutes>
+  },
+  {
+    path:`/car/:id`,
+    element:<AdminPrivateRoutes><CarDetails/></AdminPrivateRoutes>,
+    loader: async({params})=>await fetch(`http://localhost:5001/car/${params.id}`)
   }
 ])
 
