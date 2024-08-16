@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import { useLoaderData } from "react-router-dom";
 import AdminNavbar from "./AdminNavbar";
 
-const CarDetails = (props) => {
+const CarDetails = () => {
   const car = useLoaderData();
   const {_id,name,brand,price,details,photo,seat,brandNew,bankLoan}=car;
-
   return (
     <div className="bg-gray-700 container mx-auto text-white">
       <AdminNavbar />
@@ -40,7 +39,7 @@ const CarDetails = (props) => {
               <p className="mb-5">
                 <span className="font-semibold">Bank Loan :</span> {bankLoan} 
               </p>
-              <button className="btn btn-primary">Get Started</button>
+              <button className="btn btn-primary"><a href={`/updatecar/${_id}`}>Update Details</a></button>
             </div>
           </div>
         </div>
