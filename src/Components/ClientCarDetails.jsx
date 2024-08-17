@@ -1,12 +1,46 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../Providers/AuthProviders";
 
 const ClientCarDetails = (props) => {
+  const {admin}=useContext(AuthContext)
+  const [pastUsers, setPastUsers]=useState([]);
+  useEffect(()=>{
+    fetch('https://dream-car-server-jet.vercel.app/users')
+    .then(res=>res.json())
+    .then(result=>setPastUsers(result))
+  },[])
   const car = useLoaderData();
   const { _id, name, brand, price, details, photo, seat, brandNew, bankLoan } =
     car;
-
+    const handleAddToCart=(id)=>{
+      const currentUser=pastUsers.find(user=> user.name == admin.displayName && user.email == admin.email);
+      console.log("currentUser", currentUser);
+      const carId=id;
+      fetch(`https://dream-car-server-jet.vercel.app/user/${currentUser._id}`,{
+        method:"PUT",
+        headers:{
+          "content-type":"application/json",
+        },
+        body: JSON.stringify({carId})
+      })
+      .then(res=>res.json())
+      .then(result=>{
+        console.log(result)
+        if (result.modifiedCount>0) {
+          Swal.fire({
+            title:'Success !!!',
+            text:'Your car cart updated successfully !',
+            icon:'success',
+            confirmButtonText:`<a href='/'>Okay</a>`
+        })
+        }else{
+          Swal.fire('Something went wrong...')
+        }
+      })
+    }
   return (
     <div className="bg-gray-800 container mx-auto py-12">
       <div className="card lg:card-side bg-black shadow-xl p-4 text-white">
@@ -30,7 +64,7 @@ const ClientCarDetails = (props) => {
           <h2 className="card-title">Bank Loan: {bankLoan}</h2>
           <p></p>
           <div className="card-actions justify-end">
-            <button className="btn btn-primary">Add to Cart</button>
+            <button className="btn btn-primary" onClick={()=>handleAddToCart(_id)}>Add to Cart</button>
           </div>
         </div>
       </div>

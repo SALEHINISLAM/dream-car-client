@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Outlet } from 'react-router-dom'
 import Navbar from './Components/Navbar'
+import FooterCar from './Components/FooterCar'
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <div className="bg-gray-800">
       <Navbar/>
       <Outlet/>
+      <FooterCar/>
       </div>
     </>
   )

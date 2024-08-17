@@ -9,7 +9,7 @@ const ClientCarCard = ({car}) => {
   //console.log(admin.email, admin.displayName)
   const [pastUsers, setPastUsers]=useState([]);
   useEffect(()=>{
-    fetch('http://localhost:5001/users')
+    fetch('https://dream-car-server-jet.vercel.app/users')
     .then(res=>res.json())
     .then(datum=>setPastUsers(datum))
   },[])
@@ -20,7 +20,7 @@ const ClientCarCard = ({car}) => {
       const currentUser=pastUsers.find(user=> user.name == admin.displayName && user.email == admin.email);
       console.log("currentUser", currentUser);
       const carId=id;
-      fetch(`http://localhost:5001/user/${currentUser._id}`,{
+      fetch(`https://dream-car-server-jet.vercel.app/user/${currentUser._id}`,{
         method:"PUT",
         headers:{
           "content-type":"application/json",

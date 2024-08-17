@@ -19,7 +19,7 @@ const AdminCarCard = ({car}) => {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        fetch(`http://localhost:5001/car/${id}`,{
+        fetch(`https://dream-car-server-jet.vercel.app/car/${id}`,{
           method:"DELETE"
         })
         .then(res=>res.json())

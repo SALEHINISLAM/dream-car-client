@@ -60,7 +60,7 @@ const Login = (props) => {
             return;
           }
           const user = { name, email };
-          fetch("http://localhost:5001/user", {
+          fetch("https://dream-car-server-jet.vercel.app/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -110,7 +110,7 @@ const Login = (props) => {
             return;
           }
           const user = { name, email };
-          fetch("http://localhost:5001/user", {
+          fetch("https://dream-car-server-jet.vercel.app/user", {
             method: "POST",
             headers: {
               "content-type": "application/json",

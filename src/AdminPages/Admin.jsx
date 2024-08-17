@@ -21,7 +21,7 @@ const Admin = props => {
             </Link>
             <div className="container mx-auto flex flex-col gap-6 py-10">
             {
-                loadedMyCars.map((car,index)=><AdminCarCard car={car} key={index}/>)
+                loadedMyCars.length>0 ? loadedMyCars.map((car,index)=><AdminCarCard car={car} key={index}/>): <p className='text-center text-white'>You don't added any car</p>
             }
             </div>
         </div>

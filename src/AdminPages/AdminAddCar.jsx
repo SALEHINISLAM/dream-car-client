@@ -22,7 +22,7 @@ const AdminAddCar = (props) => {
         const addedBy=seller.split(' ').join('');
         const newCar={name, brand, price, details, photo, seat, brandNew, bankLoan,addedBy};
         console.log(newCar);
-        fetch(`http://localhost:5001/addcar`,{
+        fetch(`https://dream-car-server-jet.vercel.app/addcar`,{
             method:"POST",
             headers:{
                 "content-type":"application/json"

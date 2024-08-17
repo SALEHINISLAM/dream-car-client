@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProviders";
@@ -7,6 +7,14 @@ import Swal from "sweetalert2";
 const Navbar = (props) => {
   const { admin,AdminLogOut } = useContext(AuthContext);
   console.log(admin)
+  const [pastUsers, setPastUsers]=useState([]);
+  const [currentUser, setCurrentUser]=useState([]);
+  useEffect(()=>{
+    fetch('https://dream-car-server-jet.vercel.app/users')
+    .then(res=>res.json())
+    .then(datum=>setPastUsers(datum))
+  },[])
+
   const handleLogOut=async()=>{
     try{
       await AdminLogOut();
@@ -15,6 +23,15 @@ const Navbar = (props) => {
       console.log(err);
       Swal.fire(err.message)
     }
+  }
+  useEffect(()=>{
+    const ourUser=pastUsers.find(user=> user.name == admin.displayName && user.email == admin.email);
+    setCurrentUser(ourUser);
+    //console.log(currentUser._id, 'id')
+  },[])
+  const handleCart=(id)=>{
+    const ourUser=pastUsers.find(user=> user.name == admin.displayName && user.email == admin.email);
+    window.open(`/cart/${ourUser?._id}`,self);
   }
   const links = (
     <>
@@ -44,6 +61,34 @@ const Navbar = (props) => {
           }
         >
           Cars
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/contact"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? "active text-red-600 font-bold underline-offset-1 underline"
+              : isPending
+              ? "pending"
+              : ""
+          }
+        >
+          contact
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/about"
+          className={({ isActive, isPending }) =>
+            isActive
+              ? "active text-red-600 font-bold underline-offset-1 underline"
+              : isPending
+              ? "pending"
+              : ""
+          }
+        >
+          About Us
         </NavLink>
       </li>
     </>
@@ -108,7 +153,7 @@ const Navbar = (props) => {
                 </a>
               </li>
               <li>
-                <a>My Cart</a>
+                <a onClick={()=>handleCart()}>My Cart</a>
               </li>
               <li onClick={handleLogOut}>
                 <a>Logout</a>

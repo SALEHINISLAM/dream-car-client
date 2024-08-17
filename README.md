@@ -1,13 +1,8 @@
-User pages:
-# Home (/)
-# cars (/cars)
-# shop (/shop)
-# About (/about)
-# Contact (/contact)
-# login (/login)
+live site(for client): https://dream-car-63e6c.web.app/
+live site (for admin): https://dream-car-63e6c.web.app/admin
+server side: https://github.com/SALEHINISLAM/dream-car-server
 
-Admin page
-# dashboard (/admin/dashboard)
-# add car (/admin/add)
-# update car (/admin/update)
-# login (/admin/login)
+feature:
+# you can login and logout
+# admin can add , remove and update car
+# user can add car to cart or remove them from cart
