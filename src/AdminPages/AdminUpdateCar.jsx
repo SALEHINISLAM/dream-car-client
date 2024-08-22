@@ -36,7 +36,7 @@ const AdminUpdateCar = (props) => {
       addedBy,
     };
     console.log(updateCar);
-    fetch(`https://dream-car-server-jet.vercel.app/car/${_id}`, {
+    fetch(`https://dream-car-server-ua11.onrender.com/car/${_id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
