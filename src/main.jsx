@@ -45,29 +45,29 @@ const router=createBrowserRouter([
       {
         path:'/login',
         element:<Login/>,
-        loader:()=>fetch('https://dream-car-server-jet.vercel.app/users'),
+        loader:()=>fetch('https://dream-car-server-ua11.onrender.com/users'),
       },
       {
         path:'/carDetails/:id',
         element:<AdminPrivateRoutes><ClientCarDetails/></AdminPrivateRoutes>,
-        loader:({params})=>fetch(`https://dream-car-server-jet.vercel.app/car/${params.id}`)
+        loader:({params})=>fetch(`https://dream-car-server-ua11.onrender.com/car/${params.id}`)
       },
       {
         path:'/register',
         element:<Register/>,
-        loader:()=>fetch('https://dream-car-server-jet.vercel.app/users'),
+        loader:()=>fetch('https://dream-car-server-ua11.onrender.com/users'),
       },
       {
         path:'/cart/:id',
         element:<ClientCart/>,
-        loader:({params})=>fetch(`https://dream-car-server-jet.vercel.app/users/${params.id}`)
+        loader:({params})=>fetch(`https://dream-car-server-ua11.onrender.com/users/${params.id}`)
       }
     ]
   },
   {
     path:'/admin',
     element:<AdminPrivateRoutes><Admin/></AdminPrivateRoutes>,
-    loader:async()=>await fetch('https://dream-car-server-jet.vercel.app/addcar'),
+    loader:async()=>await fetch('https://dream-car-server-ua11.onrender.com/addcar'),
   },
   {
     path:'/admin/login',
@@ -84,12 +84,12 @@ const router=createBrowserRouter([
   {
     path:`/car/:id`,
     element:<AdminPrivateRoutes><CarDetails/></AdminPrivateRoutes>,
-    loader: async({params})=>await fetch(`https://dream-car-server-jet.vercel.app/car/${params.id}`)
+    loader: async({params})=>await fetch(`https://dream-car-server-ua11.onrender.com/car/${params.id}`)
   },
   {
     path:`/updatecar/:id`,
     element:<AdminPrivateRoutes><AdminUpdateCar/></AdminPrivateRoutes>,
-    loader: async({params})=>await fetch(`https://dream-car-server-jet.vercel.app/car/${params.id}`)
+    loader: async({params})=>await fetch(`https://dream-car-server-ua11.onrender.com/car/${params.id}`)
   }
 ])
 
