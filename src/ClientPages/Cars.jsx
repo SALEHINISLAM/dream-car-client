@@ -7,7 +7,7 @@ const Cars = ({num}) => {
     const [cars, setCars]=useState([]);
     const [displayCars, setDisplayCars]=useState([]);
     useEffect(()=>{
-        fetch('https://dream-car-server-jet.vercel.app/addcar')
+        fetch('https://dream-car-server-ua11.onrender.com/addcar')
         .then(response=>response.json())
         .then(result=>setCars(result))
       
