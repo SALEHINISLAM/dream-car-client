@@ -10,7 +10,7 @@ const Navbar = (props) => {
   const [pastUsers, setPastUsers]=useState([]);
   const [currentUser, setCurrentUser]=useState([]);
   useEffect(()=>{
-    fetch('https://dream-car-server-jet.vercel.app/users')
+    fetch('https://dream-car-server-ua11.onrender.com/users')
     .then(res=>res.json())
     .then(datum=>setPastUsers(datum))
   },[])
