@@ -19,7 +19,7 @@ const AdminCarCard = ({car}) => {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        fetch(`https://dream-car-server-jet.vercel.app/car/${id}`,{
+        fetch(`https://dream-car-server-ua11.onrender.com/car/${id}`,{
           method:"DELETE"
         })
         .then(res=>res.json())
