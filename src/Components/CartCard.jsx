@@ -6,7 +6,7 @@ const CartCard = ({ carId, userId }) => {
   const [car, setCar] = useState();
 
   useEffect(() => {
-    fetch(`https://dream-car-server-jet.vercel.app/car/${carId}`)
+    fetch(`https://dream-car-server-ua11.onrender.com/car/${carId}`)
       .then((res) => res.json())
       .then((result) => setCar(result));
   }, [carId]);
@@ -17,7 +17,7 @@ const CartCard = ({ carId, userId }) => {
     car;
   //console.log(car)
   const handleRemove = () => {
-    fetch(`https://dream-car-server-jet.vercel.app/user/${userId}/car/${_id}`, {
+    fetch(`https://dream-car-server-ua11.onrender.com/user/${userId}/car/${_id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
