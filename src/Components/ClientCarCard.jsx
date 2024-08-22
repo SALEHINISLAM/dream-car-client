@@ -9,7 +9,7 @@ const ClientCarCard = ({car}) => {
   //console.log(admin.email, admin.displayName)
   const [pastUsers, setPastUsers]=useState([]);
   useEffect(()=>{
-    fetch('https://dream-car-server-jet.vercel.app/users')
+    fetch('https://dream-car-server-ua11.onrender.com/users')
     .then(res=>res.json())
     .then(datum=>setPastUsers(datum))
   },[])
