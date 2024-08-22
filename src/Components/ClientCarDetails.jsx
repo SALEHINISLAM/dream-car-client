@@ -8,7 +8,7 @@ const ClientCarDetails = (props) => {
   const {admin}=useContext(AuthContext)
   const [pastUsers, setPastUsers]=useState([]);
   useEffect(()=>{
-    fetch('https://dream-car-server-jet.vercel.app/users')
+    fetch('https://dream-car-server-ua11.onrender.com/users')
     .then(res=>res.json())
     .then(result=>setPastUsers(result))
   },[])
@@ -19,7 +19,7 @@ const ClientCarDetails = (props) => {
       const currentUser=pastUsers.find(user=> user.name == admin.displayName && user.email == admin.email);
       console.log("currentUser", currentUser);
       const carId=id;
-      fetch(`https://dream-car-server-jet.vercel.app/user/${currentUser._id}`,{
+      fetch(`https://dream-car-server-ua11.onrender.com/user/${currentUser._id}`,{
         method:"PUT",
         headers:{
           "content-type":"application/json",
